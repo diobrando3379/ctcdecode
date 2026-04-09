@@ -77,6 +77,11 @@ pip install . --no-build-isolation
 pip install .
 ```
 
+离线安装
+```bash
+CTCDECODE_OFFLINE=1 pip install . --no-build-isolation
+```
+
 原因是当前仓库的 [setup.py](setup.py) 在构建阶段会直接导入 `torch.utils.cpp_extension`。
 新版本 `pip` 默认使用隔离构建环境，隔离环境看不到你当前环境里已经安装好的 PyTorch，于是会报错：
 
