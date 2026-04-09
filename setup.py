@@ -7,7 +7,15 @@ import urllib.request
 import warnings
 
 from setuptools import distutils, find_packages, setup
-from torch.utils.cpp_extension import BuildExtension, CppExtension, include_paths
+
+try:
+    from torch.utils.cpp_extension import BuildExtension, CppExtension, include_paths
+except ModuleNotFoundError as error:
+    raise ModuleNotFoundError(
+        "PyTorch is required to build ctcdecode. Install torch in the target "
+        "environment first, then retry with `pip install . --no-build-isolation` "
+        "when using modern pip."
+    ) from error
 
 
 def download_extract(url, dl_path):

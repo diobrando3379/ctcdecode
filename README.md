@@ -17,13 +17,22 @@ The library is largely self-contained and requires only PyTorch.
 Building the C++ library requires gcc or clang. 
 KenLM language modeling support is also optionally included, and enabled by default.
 
+For Chinese installation instructions targeting `torch==2.7.0+cu128`, see [README_zh.md](README_zh.md).
+
 The below installation also works for Google Colab.
 
 ```bash
 # get the code
 git clone --recursive https://github.com/WayenVan/ctcdecode.git
-cd ctcdecode && pip install .
+cd ctcdecode
+pip install . --no-build-isolation
 ```
+
+Recent versions of `pip` build local projects in an isolated environment by default.
+This package imports `torch.utils.cpp_extension` during the build, so the isolated
+build environment cannot see the PyTorch installation from your Conda or virtualenv.
+If PyTorch is already installed in your target environment, use
+`pip install . --no-build-isolation`.
 
 ## How to Use
 
